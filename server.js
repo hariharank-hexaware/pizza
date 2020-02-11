@@ -1,7 +1,5 @@
 var express = require('express');
 var app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.get('/', function (req, res) {
@@ -23,20 +21,6 @@ app.post('/fulfillment', function (req, res) {
 
 })
 
-
-
-// var id = 2;
-
-// app.delete('/deleteUser', function (req, res) {
-//    // First read existing users.
-//    fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
-//       data = JSON.parse( data );
-//       delete data["user" + 2];
-
-//       console.log( data );
-//       res.end( JSON.stringify(data));
-//    });
-// })
 
 
 
