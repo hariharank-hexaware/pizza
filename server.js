@@ -1,13 +1,7 @@
 var express = require('express');
 var app = express();
-var fs = require("fs"),
-    bodyParser = require("body-parser"),
-    moment = require('moment');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
-var _ = require('underscore');
 
 
 app.get('/', function (req, res) {
