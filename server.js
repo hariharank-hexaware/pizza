@@ -21,10 +21,9 @@ app.post('/fulfillment', function (req, res) {
     console.log(JSON.stringify(req.body));
     var data = controller.profileData;
     console.log(JSON.stringify(data))
-    if (req.body.queryResult.action == "WebCheckInIntent") {
+    if (req.body.queryResult.action == "DefaultWelcomeIntent") {
         console.log("Inside details intent");
-        if (req.body.queryResult.parameters && req.body.queryResult.parameters.PNR) {
-        }
+        
     }
 
 
