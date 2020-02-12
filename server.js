@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
 
 
 app.post('/fulfillment', function (req, res) {
-    try{
+    
         console.log("request", JSON.stringify(req.body));
       //  if (req.body.intent.displayName == "Default Welcome Intent") {
             console.log("Inside intent", req.body.intent);
@@ -61,7 +61,7 @@ app.post('/fulfillment', function (req, res) {
                 }
                 res.json(response);
            // }
-        }
+        
 
 
 
@@ -74,9 +74,7 @@ app.post('/fulfillment', function (req, res) {
 
 
 
-    catch(exception){
-        console.log("exception",exception);
-    }
+    
     //console.log(JSON.stringify(req.body));
     // if (req.body.queryResult.action == "DefaultWelcomeIntent") {
     //     console.log("Inside details intent");
