@@ -129,7 +129,6 @@ app.post('/fulfillment', function (req, res) {
      console.log("B4 send");
      res.json(response);
     } else if (req.body.queryResult.intent.displayName == "Order_Pizza_Both") {
-        selected_pizza = req.body.queryResult.parameters.SelectedPizza;
         let response = {
          "fulfillmentText": ``,
          "fulfillmentMessages": [
