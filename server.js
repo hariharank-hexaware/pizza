@@ -258,8 +258,8 @@ function getDetails() {
                 if (data.result.length > 0) {
                     var filteredObj = _.where(data.result, { "u_number": order_id1});
 
-                    status = filteredObj.u_status;
-                    return resolve(status);
+                    status = filteredObj[0].u_status;
+                    return resolve(data.result);
                     
                     
                 } else {
