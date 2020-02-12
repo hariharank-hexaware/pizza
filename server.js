@@ -58,8 +58,8 @@ app.post('/fulfillment', function (req, res) {
                         }
                       }
                     }
-
                 }
+                res.json(response);
             }
         }
 
