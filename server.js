@@ -18,65 +18,29 @@ app.post('/fulfillment', function (req, res) {
             console.log("Inside intent", req.body.queryResult.intent);
             console.log("Inside Default Welcome Intent", req.body.queryResult.intent.displayName);
             let response = {
-                
-                    "payload": {
-                      "google": {
-                        "expectUserResponse": true,
-                        "richResponse": {
-                          "items": [
-                            {
-                                "simpleResponse": {
-                                  "textToSpeech": "Here is Yoyo Pizza"
+                "fulfillmentText": ``,
+                "fulfillmentMessages": [
+                    {
+                        "card": {
+                            "title": `YOYO PIZZA`,
+                            "subtitle": `What do you like to have today`,
+                            "imageUri": `https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.gettyimages.com%2Fphotos%2Fcloseup-of-pizza-on-table-picture-id995467932%3Fs%3D612x612&imgrefurl=https%3A%2F%2Fwww.gettyimages.in%2Fphotos%2Fpizza&tbnid=O_obr5MGDOO-sM&vet=12ahUKEwjo1rmOzMznAhV71nMBHTtsDrwQMygQegUIARCkAg..i&docid=36wDU858X8BMQM&w=612&h=408&q=pizza%20images&safe=active&ved=2ahUKEwjo1rmOzMznAhV71nMBHTtsDrwQMygQegUIARCkAg`,
+                            "buttons": [
+                                {
+                                    "text": "Login",
+                                    "postback": "User Details"
                                 }
-                              },
-                            {
-                              "basicCard": {
-                                "title": "Yoyo Pizza",
-                                "subtitle": "What do you like to have today",
-                                "formattedText": "Order Veg and Non-veg pizza anytime",
-                                "image": {
-                                  "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgBsJd8BklBVRMKQU7TYJkHvM46i8wmTct3Wy8oGPpcISsZkpp",
-                                  "accessibilityText": "Yoyo Pizza"
-                                },
-                                "buttons": [
-                                  {
-                                    "title": "Login",
-                                    "openUrlAction": {
-                                      "url": "Login"
-                                    }
-                                  }
-                                ],
-                                "imageDisplayOptions": "CROPPED"
-                              }
-                            }
-                          ]
+                            ]
                         }
-                      }
                     }
-                }
-                res.json(response);
-            }
+                ]
+
+            };
+            console.log("B4 send");
+            res.json(response);    
         
 
-
-
-
-
-
-
-
-
-
-
-
-    
-    //console.log(JSON.stringify(req.body));
-    // if (req.body.queryResult.action == "DefaultWelcomeIntent") {
-    //     console.log("Inside details intent");
-        
-    // }
-
-
+       }
 })
 
 
