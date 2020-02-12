@@ -51,11 +51,29 @@ app.post('/fulfillment', function (req, res) {
                     "platform": "FACEBOOK"
                 }
             ]
-
         };
         console.log("B4 send");
         res.json(response);
-       }
+       } else if (req.body.queryResult.intent.displayName == "Order_Pizza") {
+        let response = {
+         "fulfillmentText": ``,
+         "fulfillmentMessages": [
+             {
+                 "quickReplies": {
+                     "title": "Select your type",
+                     "quickReplies": [
+                         "Veg",
+                         "Non-Veg",
+                         "Both"
+                     ]
+                 },
+                 "platform": "FACEBOOK"
+             }
+         ]
+     };
+     console.log("B4 send");
+     res.json(response);
+    }
 })
 
 
