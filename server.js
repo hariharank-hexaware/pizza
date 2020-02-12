@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
 });
 
 
-var selected_pizza, order_id, user_number, user_name, address;
+var selected_pizza, order_id, user_number, user_name, address, status;
 var objData = {
     u_order_item : selected_pizza,
     u_status : "Food is being prepared",
@@ -197,78 +197,86 @@ app.post('/fulfillment', function (req, res) {
         res.json(response);
     }  else if (req.body.queryResult.intent.displayName == "Order_Enquiry") {
         order_id = req.body.queryResult.parameters.OrderId;
+        getDetails();
         let response = {
-         "fulfillmentText": ``,
-         "fulfillmentMessages": [
-             {
-                 "quickReplies": {
-                     "title": "Select your Pizza",
-                     "quickReplies": [
-                         "Chicken Fried",
-                         "Chicken barbecue",
-                         "Chicken Roasted"
-                     ]
-                 },
-                 "platform": "FACEBOOK"
-             }
-         ]
-     };
-     console.log("B4 send");
-     res.json(response);
+            "fulfillmentText": ``,
+            "fulfillmentMessages": [
+                {
+                    "card": {
+                        "title": `${status}`,
+                        "subtitle": `Order ID - ${order_id}`,
+                        "imageUri": `https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRHbeI27sgDsg8UBdsU5zM8_Fml1PYrQ2Mnz0QUtapMMZKIa29c`,
+                        "buttons": [
+                            {
+                                "text": "Check Order status",
+                                "postback": "Order Status"
+                            }
+                        ]
+                    }
+                }
+            ]
+        };
+        console.log("B4 send");
+        res.json(response);
     }
 })
-// function getDetails() {
-//     console.log("Inside getDetails");
-//     return new Promise((resolve, reject) => {
-//         var options = {
-//             method: 'GET',
-//             url: 'https://' + process.env.instance + '/api/now/table/u_pizza_order',
-//             headers:
-//             {
-//                 'Accept': 'application/json'
-//             },
-//             auth: {
-//                 'user': process.env.username,
-//                 'password': process.env.password
-//             }
-//         };
+function getDetails() {
+    console.log("Inside getDetails");
+    return new Promise((resolve, reject) => {
+        var options = {
+            method: 'GET',
+            url: 'https://' + process.env.instance + '/api/now/table/u_pizza_order',
+            headers:
+            {
+                'Accept': 'application/json'
+            },
+            queryParams:{
+                u_number : order_id
+            },
+            auth: {
+                'user': process.env.username,
+                'password': process.env.password
+            }
+        };
 
 
-//         console.log(options);
-//         request(options, (error, response, body) => {
-//             console.log("After API Call result");
-//             if (error) {
-//                 console.log("Error in API", error);
-//                 return reject('I am unable to find the article now. Please try again later');
-//             } else if (response.statusCode == 200) {
-//                 let data = JSON.parse(body);
+        console.log(options);
+        request(options, (error, response, body) => {
+            console.log("After API Call result");
+            if (error) {
+                console.log("Error in API", error);
+                return reject('I am unable to find the article now. Please try again later');
+            } else if (response.statusCode == 200) {
+                let data = JSON.parse(body);
 
-//                 // console.log("data.result.text",data.result[0].text);
-//                 // let parsedata = JSON.stringify(data.result[0].text);
-//                 // const dom = new JSDOM(parsedata);
-//                 // console.log("parsed data",dom.window.document.querySelector("p")); 
+                // console.log("data.result.text",data.result[0].text);
+                // let parsedata = JSON.stringify(data.result[0].text);
+                // const dom = new JSDOM(parsedata);
+                // console.log("parsed data",dom.window.document.querySelector("p")); 
 
 
-//                 console.log('data.result', data.result);
-//                 console.log("Waiting for API");
-//                 if (data.result.length > 0) {
-//                     if(data.result.u_number)
-//                     return resolve(data.result);
+                console.log('data.result', data.result);
+                console.log("Waiting for API");
+                if (data.result.length > 0) {
+                    status = data.result.u_status;
+                    return resolve(data.result.u_status);
                     
-//                 } else {
-//                     return resolve("Sorry I am not able to find it.");
-//                 }
-//             }
+                    
+                } else {
+                    status = "Sorry I am not able to find it.";
+                    return resolve("Sorry I am not able to find it.");
+                }
+            }
             
 
-//             else {
-//                 console.log("No service");
-//                 return resolve(`Service currently unavailable`);
-//             }
+            else {
+                console.log("No service");
+                return resolve(`Service currently unavailable`);
+            }
             
-//         });
-//     });
-// }
+        });
+    });
+}
 
 function sendDetails() {
     console.log("Inside sendDetails");
@@ -278,7 +286,7 @@ function sendDetails() {
             url: 'https://' + process.env.instance + '/api/now/table/u_pizza_order',
             headers:
             {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
             },
              body: objData,
             json: true,
