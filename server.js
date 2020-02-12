@@ -14,6 +14,53 @@ app.get('/', function (req, res) {
 app.post('/fulfillment', function (req, res) {
     try{
         console.log("request", JSON.stringify(req.body));
+        if (req.body.intent.displayName) {
+            console.log("Inside Default Welcome Intent");
+            let response = {
+                
+                    "payload": {
+                      "google": {
+                        "expectUserResponse": true,
+                        "richResponse": {
+                          "items": [
+                            {
+                              "simpleResponse": {
+                                "textToSpeech": "Here's an example of a basic card."
+                              }
+                            },
+                            {
+                              "basicCard": {
+                                "title": "Yoyo Pizza",
+                                "subtitle": "What do you like to have today",
+                                "formattedText": "Order Veg and Non-veg pizza anytime",
+                                "image": {
+                                  "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgBsJd8BklBVRMKQU7TYJkHvM46i8wmTct3Wy8oGPpcISsZkpp",
+                                  "accessibilityText": "Yoyo Pizza"
+                                },
+                                "buttons": [
+                                  {
+                                    "title": "Login",
+                                    "openUrlAction": {
+                                      "url": "Login"
+                                    }
+                                  }
+                                ],
+                                "imageDisplayOptions": "CROPPED"
+                              }
+                            },
+                            {
+                              "simpleResponse": {
+                                "textToSpeech": "Here is Yoyo Pizza"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+
+                }
+            }
+        }
 
 
 
@@ -25,7 +72,7 @@ app.post('/fulfillment', function (req, res) {
 
 
 
-    }
+
     catch(exception){
         console.log("exception",exception);
     }
