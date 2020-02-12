@@ -34,12 +34,27 @@ app.post('/fulfillment', function (req, res) {
                         }
                     }
                 ]
-
             };
             console.log("B4 send");
             res.json(response);    
-        
+       } else if (req.body.queryResult.intent.displayName == "User_Details") {
+           let response = {
+            "fulfillmentText": ``,
+            "fulfillmentMessages": [
+                {
+                    "quickReplies": {
+                        "title": "Login Successfull. Tap to order.",
+                        "quickReplies": [
+                            "Have pizza"
+                        ]
+                    },
+                    "platform": "FACEBOOK"
+                }
+            ]
 
+        };
+        console.log("B4 send");
+        res.json(response);
        }
 })
 
