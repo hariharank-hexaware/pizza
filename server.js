@@ -10,7 +10,12 @@ app.get('/', function (req, res) {
 
 
 app.post('/fulfillment', function (req, res) {
-    console.log("request", req);
+    try{
+        console.log("request", req);
+    }
+    catch(exception){
+        console.log("exception",exception);
+    }
     //console.log(JSON.stringify(req.body));
     // if (req.body.queryResult.action == "DefaultWelcomeIntent") {
     //     console.log("Inside details intent");
