@@ -199,6 +199,7 @@ app.post('/fulfillment', function (req, res) {
     }  else if (req.body.queryResult.intent.displayName == "Order_Enquiry") {
         order_id1 = req.body.queryResult.parameters.OrderId;
         getDetails();
+        console.log("status",status);
         let response = {
             "fulfillmentText": ``,
             "fulfillmentMessages": [
@@ -260,7 +261,7 @@ function getDetails() {
             
                     status = filteredObj[0].u_status;
                     console.log("filteredObj",filteredObj[0].u_status );
-                    return resolve(data.result);
+                    return resolve(status);
                     
                     
                 } else {
