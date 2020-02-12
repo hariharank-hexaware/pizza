@@ -257,7 +257,7 @@ function getDetails() {
                 console.log("Waiting for API");
                 if (data.result.length > 0) {
                     var filteredObj = _.where(data.result, { "u_number": order_id1});
-
+                    console.log("filteredObj", filteredObj);
                     status = filteredObj[0].u_status;
                     return resolve(data.result);
                     
