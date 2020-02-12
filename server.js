@@ -43,9 +43,9 @@ app.post('/fulfillment', function (req, res) {
             "fulfillmentMessages": [
                 {
                     "quickReplies": {
-                        "title": "Login Successfull. Tap to order.",
+                        "title": "Login Successfull.",
                         "quickReplies": [
-                            "Have pizza"
+                            "Tap to order Pizza."
                         ]
                     },
                     "platform": "FACEBOOK"
@@ -65,6 +65,25 @@ app.post('/fulfillment', function (req, res) {
                          "Veg",
                          "Non-Veg",
                          "Both"
+                     ]
+                 },
+                 "platform": "FACEBOOK"
+             }
+         ]
+     };
+     console.log("B4 send");
+     res.json(response);
+    } else if (req.body.queryResult.intent.displayName == "Order_Pizza_Veg") {
+        let response = {
+         "fulfillmentText": ``,
+         "fulfillmentMessages": [
+             {
+                 "quickReplies": {
+                     "title": "Select your Pizza",
+                     "quickReplies": [
+                         "Veg Maharaja",
+                         "Paneer Pizza",
+                         "Golden Corn"
                      ]
                  },
                  "platform": "FACEBOOK"
