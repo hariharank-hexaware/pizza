@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
+var _ = require('underscore'),
 
 'use strict';
 
@@ -15,7 +16,7 @@ app.get('/', function (req, res) {
 });
 
 
-var selected_pizza, order_id, user_number, user_name, address, status;
+var selected_pizza, order_id, user_number, user_name, address, status, order_id1;
 var objData = {
     u_order_item : selected_pizza,
     u_status : "Food is being prepared",
@@ -195,7 +196,7 @@ app.post('/fulfillment', function (req, res) {
         console.log("B4 send");
         res.json(response);
     }  else if (req.body.queryResult.intent.displayName == "Order_Enquiry") {
-        order_id = req.body.queryResult.parameters.OrderId;
+        order_id1 = req.body.queryResult.parameters.OrderId;
         getDetails();
         let response = {
             "fulfillmentText": ``,
@@ -229,9 +230,6 @@ function getDetails() {
             {
                 'Accept': 'application/json'
             },
-            queryParams:{
-                u_number : order_id
-            },
             auth: {
                 'user': process.env.username,
                 'password': process.env.password
@@ -257,8 +255,10 @@ function getDetails() {
                 console.log('data.result', data.result);
                 console.log("Waiting for API");
                 if (data.result.length > 0) {
-                    status = data.result.u_status;
-                    return resolve(data.result.u_status);
+                    var filteredObj = _.where(data.result, { "u_number": order_id1});
+
+                    status = filteredObj.u_status;
+                    return resolve(status);
                     
                     
                 } else {
