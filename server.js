@@ -15,7 +15,8 @@ app.post('/fulfillment', function (req, res) {
     try{
         console.log("request", JSON.stringify(req.body));
         if (req.body.intent.displayName == "Default Welcome Intent") {
-            console.log("Inside Default Welcome Intent");
+            console.log("Inside intent", req.body.intent);
+            console.log("Inside Default Welcome Intent", req.body.intent.displayName);
             let response = {
                 
                     "payload": {
