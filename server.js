@@ -146,7 +146,7 @@ app.post('/fulfillment', function (req, res) {
                 {
                     "card": {
                         "title": `${selected_pizza}`,
-                        "subtitle": `What do you like to have today`,
+                        "subtitle": `Added to Cart`,
                         "imageUri": `https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTeN9ZmxOgfpz2fNKoay9gqh5sgKCkpSzbjEYbNuby5dhnJV-_C`,
                         "buttons": [
                             {
