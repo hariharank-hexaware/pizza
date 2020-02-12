@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
 app.post('/fulfillment', function (req, res) {
     try{
         console.log("request", JSON.stringify(req.body));
-        if (req.body.intent.displayName) {
+        if (req.body.intent.displayName == "Default Welcome Intent") {
             console.log("Inside Default Welcome Intent");
             let response = {
                 
