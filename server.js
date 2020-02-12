@@ -25,10 +25,10 @@ app.post('/fulfillment', function (req, res) {
                         "richResponse": {
                           "items": [
                             {
-                              "simpleResponse": {
-                                "textToSpeech": "Here's an example of a basic card."
-                              }
-                            },
+                                "simpleResponse": {
+                                  "textToSpeech": "Here is Yoyo Pizza"
+                                }
+                              },
                             {
                               "basicCard": {
                                 "title": "Yoyo Pizza",
@@ -47,11 +47,6 @@ app.post('/fulfillment', function (req, res) {
                                   }
                                 ],
                                 "imageDisplayOptions": "CROPPED"
-                              }
-                            },
-                            {
-                              "simpleResponse": {
-                                "textToSpeech": "Here is Yoyo Pizza"
                               }
                             }
                           ]
