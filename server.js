@@ -205,7 +205,7 @@ app.post('/fulfillment', function (req, res) {
                 {
                     "card": {
                         "title": `${status}`,
-                        "subtitle": `Order ID - ${order_id}`,
+                        "subtitle": `Order ID - ${order_id1}`,
                         "imageUri": `https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRHbeI27sgDsg8UBdsU5zM8_Fml1PYrQ2Mnz0QUtapMMZKIa29c`,
                         "buttons": [
                             {
@@ -257,8 +257,9 @@ function getDetails() {
                 console.log("Waiting for API");
                 if (data.result.length > 0) {
                     var filteredObj = _.where(data.result, { "u_number": order_id1});
-                    console.log("filteredObj", filteredObj);
+            
                     status = filteredObj[0].u_status;
+                    console.log("filteredObj",filteredObj[0].u_status );
                     return resolve(data.result);
                     
                     
