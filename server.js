@@ -10,6 +10,8 @@ app.get('/', function (req, res) {
 });
 
 
+var selected_pizza;
+
 
 app.post('/fulfillment', function (req, res) {
     
@@ -74,6 +76,7 @@ app.post('/fulfillment', function (req, res) {
      console.log("B4 send");
      res.json(response);
     } else if (req.body.queryResult.intent.displayName == "Order_Pizza_Veg") {
+        selected_pizza = req.body.queryResult.parameters.SelectedPizza;
         let response = {
          "fulfillmentText": ``,
          "fulfillmentMessages": [
@@ -92,6 +95,92 @@ app.post('/fulfillment', function (req, res) {
      };
      console.log("B4 send");
      res.json(response);
+    } else if (req.body.queryResult.intent.displayName == "Order_Pizza_NonVeg") {
+        selected_pizza = req.body.queryResult.parameters.SelectedPizza;
+        let response = {
+         "fulfillmentText": ``,
+         "fulfillmentMessages": [
+             {
+                 "quickReplies": {
+                     "title": "Select your Pizza",
+                     "quickReplies": [
+                         "Chicken Fried",
+                         "Chicken barbecue",
+                         "Chicken Roasted"
+                     ]
+                 },
+                 "platform": "FACEBOOK"
+             }
+         ]
+     };
+     console.log("B4 send");
+     res.json(response);
+    } else if (req.body.queryResult.intent.displayName == "Order_Pizza_Both") {
+        selected_pizza = req.body.queryResult.parameters.SelectedPizza;
+        let response = {
+         "fulfillmentText": ``,
+         "fulfillmentMessages": [
+             {
+                 "quickReplies": {
+                     "title": "Select your Pizza",
+                     "quickReplies": [
+                         "Chicken Fried",
+                         "Chicken barbecue",
+                         "Chicken Roasted",
+                         "Veg Maharaja",
+                         "Paneer Pizza",
+                         "Golden Corn"
+                     ]
+                 },
+                 "platform": "FACEBOOK"
+             }
+         ]
+     };
+     console.log("B4 send");
+     res.json(response);
+    } else if (req.body.queryResult.intent.displayName == "Order_Pizza_Veg_Type" || req.body.queryResult.intent.displayName == "Order_Pizza_NonVeg_Type" || req.body.queryResult.intent.displayName == "Order_Pizza_Both_Type") {
+        selected_pizza = req.body.queryResult.parameters.SelectedPizza;
+        let response = {
+            "fulfillmentText": ``,
+            "fulfillmentMessages": [
+                {
+                    "card": {
+                        "title": `${selected_pizza}`,
+                        "subtitle": `What do you like to have today`,
+                        "imageUri": `https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTeN9ZmxOgfpz2fNKoay9gqh5sgKCkpSzbjEYbNuby5dhnJV-_C`,
+                        "buttons": [
+                            {
+                                "text": "Place Order",
+                                "postback": "Place Order"
+                            }
+                        ]
+                    }
+                }
+            ]
+        };
+        console.log("B4 send");
+        res.json(response);  
+    } else if (req.body.queryResult.intent.displayName == "Order_Pizza_Veg_Size_Cart"  ||req.body.queryResult.intent.displayName == "Order_Pizza_NonVeg_Size_Cart" ||req.body.queryResult.intent.displayName == "Order_Pizza_Both_Size_Cart"   ) {
+        let response = {
+            "fulfillmentText": ``,
+            "fulfillmentMessages": [
+                {
+                    "card": {
+                        "title": `Order ID`,
+                        "subtitle": `123221`,
+                        "imageUri": `https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRHbeI27sgDsg8UBdsU5zM8_Fml1PYrQ2Mnz0QUtapMMZKIa29c`,
+                        "buttons": [
+                            {
+                                "text": "Check Order status",
+                                "postback": "Order Status"
+                            }
+                        ]
+                    }
+                }
+            ]
+        };
+        console.log("B4 send");
+        res.json(response);
     }
 })
 
