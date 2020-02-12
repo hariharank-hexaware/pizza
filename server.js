@@ -16,10 +16,10 @@ app.get('/', function (req, res) {
 
 
 var selected_pizza, order_id, user_number, user_name, address;
-var objData ={
-    u_order_item = selected_pizza,
-    u_status = "Food is being prepared",
-    u_user_number = user_number
+var objData = {
+    u_order_item : selected_pizza,
+    u_status : "Food is being prepared",
+    u_user_number : user_number
 }
 
 
