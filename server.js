@@ -13,7 +13,18 @@ app.get('/', function (req, res) {
 
 app.post('/fulfillment', function (req, res) {
     try{
-        console.log("request", req);
+        console.log("request", JSON.stringify(req.body));
+
+
+
+
+
+
+
+
+
+
+
     }
     catch(exception){
         console.log("exception",exception);
