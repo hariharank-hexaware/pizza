@@ -199,7 +199,8 @@ app.post('/fulfillment', function (req, res) {
     }  else if (req.body.queryResult.intent.displayName == "Order_Enquiry") {
         order_id1 = req.body.queryResult.parameters.OrderId;
         var newStatus = getDetails();
-        console.log("status",status);
+        
+        console.log("status",newStatus);
         let response = {
             "fulfillmentText": ``,
             "fulfillmentMessages": [
@@ -266,7 +267,7 @@ function getDetails() {
                     
                 } else {
                     status = "Sorry I am not able to find it.";
-                    return resolve(stauts);
+                    return resolve(status);
                 }
             }
             
