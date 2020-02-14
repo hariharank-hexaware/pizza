@@ -41,7 +41,7 @@ app.post('/fulfillment', function (req, res) {
                             "imageUri": `https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTeN9ZmxOgfpz2fNKoay9gqh5sgKCkpSzbjEYbNuby5dhnJV-_C`,
                             "buttons": [
                                 {
-                                    "text": "Login",
+                                    "text": "Register",
                                     "postback": "User Details"
                                 }
                             ]
