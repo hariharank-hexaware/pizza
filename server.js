@@ -261,7 +261,7 @@ function getDetails() {
                     var filteredObj = _.where(data.result, { "u_number": order_id1});
             
                     status = filteredObj[0].u_status;
-                    console.log("filteredObj",filteredObj[0].u_status );
+                    console.log("filteredObj",status );
                     return resolve(status);
                     
                     
