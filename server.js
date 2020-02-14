@@ -175,7 +175,7 @@ app.post('/fulfillment', function (req, res) {
         };
         console.log("B4 send");
         res.json(response);  
-    } else if (req.body.queryResult.intent.displayName == "Order_Pizza_Veg_Size_Cart"  ||req.body.queryResult.intent.displayName == "Order_Pizza_NonVeg_Size_Cart" ||req.body.queryResult.intent.displayName == "Order_Pizza_Both_Size_Cart"   ) {
+    } else if (req.body.queryResult.intent.displayName == "Order_Pizza_Veg_Size_Cart"  ||req.body.queryResult.intent.displayName == "Order_Pizza_NonVeg_Size_Cart" ||req.body.queryResult.intent.displayName == "Order_Pizza_Both_Size_Cart") {
         let response = {
             "fulfillmentText": ``,
             "fulfillmentMessages": [
@@ -198,14 +198,14 @@ app.post('/fulfillment', function (req, res) {
         res.json(response);
     }  else if (req.body.queryResult.intent.displayName == "Order_Enquiry") {
         order_id1 = req.body.queryResult.parameters.OrderId;
-        getDetails();
+        var newStatus = getDetails();
         console.log("status",status);
         let response = {
             "fulfillmentText": ``,
             "fulfillmentMessages": [
                 {
                     "card": {
-                        "title": `${status}`,
+                        "title": `${newStatus}`,
                         "subtitle": `Order ID - ${order_id1}`,
                         "imageUri": `https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRHbeI27sgDsg8UBdsU5zM8_Fml1PYrQ2Mnz0QUtapMMZKIa29c`,
                         "buttons": [
@@ -266,7 +266,7 @@ function getDetails() {
                     
                 } else {
                     status = "Sorry I am not able to find it.";
-                    return resolve("Sorry I am not able to find it.");
+                    return resolve(stauts);
                 }
             }
             
