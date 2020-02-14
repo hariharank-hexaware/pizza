@@ -198,15 +198,15 @@ app.post('/fulfillment', function (req, res) {
         res.json(response);
     }  else if (req.body.queryResult.intent.displayName == "Order_Enquiry") {
         order_id1 = req.body.queryResult.parameters.OrderId;
-        var newStatus = getDetails();
+        getDetails();
         
-        console.log("status",newStatus);
+        console.log("status",status);
         let response = {
             "fulfillmentText": ``,
             "fulfillmentMessages": [
                 {
                     "card": {
-                        "title": `${newStatus}`,
+                        "title": `${status}`,
                         "subtitle": `Order ID - ${order_id1}`,
                         "imageUri": `https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRHbeI27sgDsg8UBdsU5zM8_Fml1PYrQ2Mnz0QUtapMMZKIa29c`,
                         "buttons": [
