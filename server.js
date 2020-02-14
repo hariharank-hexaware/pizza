@@ -198,7 +198,7 @@ app.post('/fulfillment', function (req, res) {
         res.json(response);
     }  else if (req.body.queryResult.intent.displayName == "Order_Enquiry") {
         order_id1 = req.body.queryResult.parameters.OrderId;
-        getDetails();
+        status = getDetails();
         
         console.log("status",status);
         let response = {
@@ -260,13 +260,13 @@ function getDetails() {
                 if (data.result.length > 0) {
                     var filteredObj = _.where(data.result, { "u_number": order_id1});
             
-                    status = filteredObj[0].u_status;
+                    let status = filteredObj[0].u_status;
                     console.log("filteredObj",status );
                     return resolve(status);
                     
                     
                 } else {
-                    status = "Sorry I am not able to find it.";
+                    let status = "Sorry I am not able to find it.";
                     return resolve(status);
                 }
             }
